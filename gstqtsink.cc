@@ -19,7 +19,7 @@
  */
 
 /**
- * SECTION:gstqtsink
+ * SECTION:element-qmlglsink
  *
  * qmlglsink provides a way to render a video stream as a Qml object inside
  * the Qml scene graph.  This is achieved by providing the incoming OpenGL
@@ -108,7 +108,7 @@ GST_STATIC_PAD_TEMPLATE ("sink",
     GST_PAD_SINK,
     GST_PAD_ALWAYS,
     GST_STATIC_CAPS ("video/x-raw(" GST_CAPS_FEATURE_MEMORY_GL_MEMORY "), "
-    "format = (string) { RGB, RGBA }, "
+    "format = (string) { RGB, RGBA, BGRA, YV12, NV12 }, "
     "width = " GST_VIDEO_SIZE_RANGE ", "
     "height = " GST_VIDEO_SIZE_RANGE ", "
     "framerate = " GST_VIDEO_FPS_RANGE ", "
@@ -558,16 +558,15 @@ config_failed:
 
 static void
 gst_qt_sink_navigation_send_event (GstNavigation * navigation,
-                                         GstStructure * structure)
+                                   GstEvent * event)
 {
   GstQtSink *qt_sink = GST_QT_SINK (navigation);
-  GstEvent *event;
   GstPad *pad;
 
-  event = gst_event_new_navigation (structure);
   pad = gst_pad_get_peer (GST_VIDEO_SINK_PAD (qt_sink));
 
-  GST_TRACE_OBJECT (qt_sink, "navigation event %" GST_PTR_FORMAT, structure);
+  GST_TRACE_OBJECT (qt_sink, "navigation event %" GST_PTR_FORMAT,
+      gst_event_get_structure(event));
 
   if (GST_IS_PAD (pad) && GST_IS_EVENT (event)) {
     if (!gst_pad_send_event (pad, gst_event_ref (event))) {
@@ -583,5 +582,5 @@ gst_qt_sink_navigation_send_event (GstNavigation * navigation,
 
 static void gst_qt_sink_navigation_interface_init (GstNavigationInterface * iface)
 {
-  iface->send_event = gst_qt_sink_navigation_send_event;
+  iface->send_event_simple = gst_qt_sink_navigation_send_event;
 }
