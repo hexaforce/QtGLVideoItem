@@ -21,33 +21,32 @@
 #ifndef __QT_GL_UTILS_H__
 #define __QT_GL_UTILS_H__
 
-#include <gst/gst.h>
 #include <gst/gl/gl.h>
+#include <gst/gst.h>
 
-#include <QVariant>
 #include <QRunnable>
+#include <QVariant>
 
 G_BEGIN_DECLS
 
 struct RenderJob : public QRunnable {
-    using Callable = std::function<void()>;
+  using Callable = std::function<void()>;
 
-    explicit RenderJob(Callable c) : _c(c) { }
+  explicit RenderJob(Callable c) : _c(c) {}
 
-    void run() { _c(); }
+  void run() { _c(); }
 
 private:
-    Callable _c;
+  Callable _c;
 };
 
-GstGLDisplay * gst_qt_get_gl_display (gboolean sink);
-gboolean       gst_qt_get_gl_wrapcontext (GstGLDisplay * display,
-    GstGLContext **wrap_glcontext, GstGLContext **context);
+GstGLDisplay *gst_qt_get_gl_display(gboolean sink);
+gboolean gst_qt_get_gl_wrapcontext(GstGLDisplay *display, GstGLContext **wrap_glcontext, GstGLContext **context);
 
 G_END_DECLS
 
 #if defined(__cplusplus)
-QVariant       qt_opengl_native_context_from_gst_gl_context     (GstGLContext * context);
+QVariant qt_opengl_native_context_from_gst_gl_context(GstGLContext *context);
 #endif
 
 #endif /* __QT_GL_UTILS_H__ */

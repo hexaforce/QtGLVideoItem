@@ -24,11 +24,11 @@
 
 G_BEGIN_DECLS
 
-void qt5_element_init (GstPlugin * plugin);
+void qt5_element_init(GstPlugin *plugin);
 
-GST_ELEMENT_REGISTER_DECLARE (qmlglsink);
-GST_ELEMENT_REGISTER_DECLARE (qmlglsrc);
-GST_ELEMENT_REGISTER_DECLARE (qmlgloverlay);
+GST_ELEMENT_REGISTER_DECLARE(qmlglsink);
+GST_ELEMENT_REGISTER_DECLARE(qmlglsrc);
+GST_ELEMENT_REGISTER_DECLARE(qmlgloverlay);
 
 G_END_DECLS
 

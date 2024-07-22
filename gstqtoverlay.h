@@ -21,11 +21,11 @@
 #ifndef __GST_QT_OVERLAY_H__
 #define __GST_QT_OVERLAY_H__
 
-#include <gst/gst.h>
-#include <gst/video/video.h>
-#include <gst/gl/gl.h>
 #include "qtglrenderer.h"
 #include "qtitem.h"
+#include <gst/gl/gl.h>
+#include <gst/gst.h>
+#include <gst/video/video.h>
 
 typedef struct _GstQtOverlay GstQtOverlay;
 typedef struct _GstQtOverlayClass GstQtOverlayClass;
@@ -33,27 +33,26 @@ typedef struct _GstQtOverlayPrivate GstQtOverlayPrivate;
 
 G_BEGIN_DECLS
 
-GType gst_qt_overlay_get_type (void);
-#define GST_TYPE_QT_OVERLAY            (gst_qt_overlay_get_type())
-#define GST_QT_OVERLAY(obj)            (G_TYPE_CHECK_INSTANCE_CAST((obj),GST_TYPE_QT_OVERLAY,GstQtOverlay))
-#define GST_QT_OVERLAY_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST((klass),GST_TYPE_QT_OVERLAY,GstQtOverlayClass))
-#define GST_IS_QT_OVERLAY(obj)         (G_TYPE_CHECK_INSTANCE_TYPE((obj),GST_TYPE_QT_OVERLAY))
-#define GST_IS_QT_OVERLAY_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass),GST_TYPE_QT_OVERLAY))
-#define GST_QT_OVERLAY_CAST(obj)       ((GstQtOverlay*)(obj))
+GType gst_qt_overlay_get_type(void);
+#define GST_TYPE_QT_OVERLAY (gst_qt_overlay_get_type())
+#define GST_QT_OVERLAY(obj) (G_TYPE_CHECK_INSTANCE_CAST((obj), GST_TYPE_QT_OVERLAY, GstQtOverlay))
+#define GST_QT_OVERLAY_CLASS(klass) (G_TYPE_CHECK_CLASS_CAST((klass), GST_TYPE_QT_OVERLAY, GstQtOverlayClass))
+#define GST_IS_QT_OVERLAY(obj) (G_TYPE_CHECK_INSTANCE_TYPE((obj), GST_TYPE_QT_OVERLAY))
+#define GST_IS_QT_OVERLAY_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE((klass), GST_TYPE_QT_OVERLAY))
+#define GST_QT_OVERLAY_CAST(obj) ((GstQtOverlay *)(obj))
 
 /**
  * GstQtOverlay:
  *
  * Opaque #GstQtOverlay object
  */
-struct _GstQtOverlay
-{
+struct _GstQtOverlay {
   /* <private> */
-  GstGLFilter           parent;
+  GstGLFilter parent;
 
-  gchar                *qml_scene;
+  gchar *qml_scene;
 
-  GstQuickRenderer     *renderer;
+  GstQuickRenderer *renderer;
 
   QSharedPointer<QtGLVideoItemInterface> widget;
 };
@@ -63,13 +62,12 @@ struct _GstQtOverlay
  *
  * The #GstQtOverlayClass struct only contains private data
  */
-struct _GstQtOverlayClass
-{
+struct _GstQtOverlayClass {
   /* <private> */
   GstGLFilterClass parent_class;
 };
 
-GstQtOverlay *    gst_qt_overlay_new (void);
+GstQtOverlay *gst_qt_overlay_new(void);
 
 G_END_DECLS
 

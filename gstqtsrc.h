@@ -21,40 +21,39 @@
 #ifndef __GST_QT_SRC_H__
 #define __GST_QT_SRC_H__
 
-#include <gst/gst.h>
-#include <gst/base/gstpushsrc.h>
-#include <gst/video/video.h>
-#include <gst/gl/gl.h>
 #include "qtwindow.h"
+#include <gst/base/gstpushsrc.h>
+#include <gst/gl/gl.h>
+#include <gst/gst.h>
+#include <gst/video/video.h>
 
 G_BEGIN_DECLS
 
 #define GST_TYPE_QT_SRC (gst_qt_src_get_type())
-G_DECLARE_FINAL_TYPE (GstQtSrc, gst_qt_src, GST, QT_SRC, GstPushSrc)
-#define GST_QT_SRC_CAST(obj) ((GstQtSrc*)(obj))
+G_DECLARE_FINAL_TYPE(GstQtSrc, gst_qt_src, GST, QT_SRC, GstPushSrc)
+#define GST_QT_SRC_CAST(obj) ((GstQtSrc *)(obj))
 
 /**
  * GstQtSrc:
  *
  * Opaque #GstQtSrc object
  */
-struct _GstQtSrc
-{
+struct _GstQtSrc {
   /* <private> */
-  GstPushSrc            parent;
+  GstPushSrc parent;
 
-  QQuickWindow          *qwindow;
-  QtGLWindow            *window;
+  QQuickWindow *qwindow;
+  QtGLWindow *window;
 
-  GstVideoInfo          v_info;
+  GstVideoInfo v_info;
 
-  GstGLDisplay         *display;
-  GstGLContext         *context;
-  GstGLContext         *qt_context;
+  GstGLDisplay *display;
+  GstGLContext *context;
+  GstGLContext *qt_context;
 
-  gboolean              default_fbo;
-  gboolean              downstream_supports_affine_meta;
-  gboolean              pending_image_orientation;
+  gboolean default_fbo;
+  gboolean downstream_supports_affine_meta;
+  gboolean pending_image_orientation;
 };
 
 G_END_DECLS

@@ -21,41 +21,40 @@
 #ifndef __GST_QT_SINK_H__
 #define __GST_QT_SINK_H__
 
+#include "qtitem.h"
+#include <gst/gl/gl.h>
 #include <gst/gst.h>
 #include <gst/video/gstvideosink.h>
 #include <gst/video/video.h>
-#include <gst/gl/gl.h>
-#include "qtitem.h"
 
 typedef struct _GstQtSinkPrivate GstQtSinkPrivate;
 
 G_BEGIN_DECLS
 
 #define GST_TYPE_QT_SINK (gst_qt_sink_get_type())
-G_DECLARE_FINAL_TYPE (GstQtSink, gst_qt_sink, GST, QT_SINK, GstVideoSink)
-#define GST_QT_SINK_CAST(obj) ((GstQtSink*)(obj))
+G_DECLARE_FINAL_TYPE(GstQtSink, gst_qt_sink, GST, QT_SINK, GstVideoSink)
+#define GST_QT_SINK_CAST(obj) ((GstQtSink *)(obj))
 
 /**
  * GstQtSink:
  *
  * Opaque #GstQtSink object
  */
-struct _GstQtSink
-{
+struct _GstQtSink {
   /* <private> */
-  GstVideoSink          parent;
+  GstVideoSink parent;
 
-  GstVideoInfo          v_info;
-  GstBufferPool        *pool;
+  GstVideoInfo v_info;
+  GstBufferPool *pool;
 
-  GstGLDisplay         *display;
-  GstGLContext         *context;
-  GstGLContext         *qt_context;
+  GstGLDisplay *display;
+  GstGLContext *context;
+  GstGLContext *qt_context;
 
   QSharedPointer<QtGLVideoItemInterface> widget;
 };
 
-GstQtSink *    gst_qt_sink_new (void);
+GstQtSink *gst_qt_sink_new(void);
 
 G_END_DECLS
 
